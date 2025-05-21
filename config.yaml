@@ -1,6 +1,6 @@
 # Base data directory (shared drive)
-data_dir: '/Users/mbraaksma/Library/CloudStorage/GoogleDrive-braak014@umn.edu/Shared drives/NatCapTEEMs/Projects/Global GEP/Ecosystem Services SubFolders/Recreation/data/processed'
-# data_dir: 's3://Files/base_data/gep_recreation'
+# data_dir: '/Users/mbraaksma/Library/CloudStorage/GoogleDrive-braak014@umn.edu/Shared drives/NatCapTEEMs/Projects/Global GEP/Ecosystem Services SubFolders/Recreation/data/processed'
+data_dir: 's3://Files/base_data/gep_recreation'
 
 # Input raster relative paths under data_dir
 inputs:
