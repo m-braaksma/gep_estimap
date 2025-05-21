@@ -1,0 +1,79 @@
+# Base data directory (shared drive)
+data_dir: '/Users/mbraaksma/Library/CloudStorage/GoogleDrive-braak014@umn.edu/Shared drives/NatCapTEEMs/Projects/Global GEP/Ecosystem Services SubFolders/Recreation/data/processed'
+# data_dir: 's3://Files/base_data/gep_recreation'
+
+# Input raster relative paths under data_dir
+inputs:
+  lulc:
+    cropland: 'lulc/lulc_esa_seals7_2010_1km_cropland_share.tif'
+    forest: 'lulc/lulc_esa_seals7_2010_1km_forest_share.tif'
+    grassland: 'lulc/lulc_esa_seals7_2010_1km_grassland_share.tif'
+    othernat: 'lulc/lulc_esa_seals7_2010_1km_othernat_share.tif'
+    urban: 'lulc/lulc_esa_seals7_2010_1km_urban_share.tif'
+    water: 'lulc/lulc_esa_seals7_2010_1km_water_share.tif'
+  pa:
+    wdpa: 'pa/wdpa_share_1km.tif'
+    kba: 'pa/kba_share_1km.tif'
+  road: 'grip4_road_length/grip4_road_length_1km.tif'
+  pop: 'worldpop/ppp_2010_1km_aligned.tif'
+
+# Output raster relative paths under data_dir
+estimap:
+  ebp: 'estimap_dir/eb-p_1km.tif'
+  human_inputs: 'estimap_dir/human_inputs_1km.tif'
+  ros: 'estimap_dir/ros_1km.tif'
+  high_quality: 'estimap_dir/high_quality_1km.tif'
+  distance_to_hq: 'estimap_dir/distance_to_hq_1km.tif'
+  visits: 'estimap_dir/visits_1km.tif'
+  value: 'estimap_dir/value_1km.tif'
+
+# Conda (mamba) env
+conda: 'envs/geo.yaml'
+
+# Scoring parameters
+scores:
+  # EB-P
+  lulc:
+    cropland: 0.4
+    forest: 1.0
+    grassland: 0.7
+    othernat: 0.85
+    water: 1.0
+    urban: 0.05
+    other: 0.0
+  pa_score: 1.0
+  kba_score: 0.8
+  ebp_classify:
+    high: 1.5
+    med_high: 1.0
+    med_low: 0.5
+    low: 0
+  # Human Input
+  urban_classify:
+    high: 0.9
+    med_high: 0.5
+    med: 0.1
+    med_low: 0.001
+    low: 0
+  road_classify:
+    high: 100000
+    med_high: 33819
+    med: 13326
+    med_low: 5453
+    low: 0
+  urban_road_matrix:
+    - [1, 1, 2, 3, 4]
+    - [1, 1, 2, 3, 4]
+    - [2, 2, 2, 4, 5]
+    - [3, 3, 4, 5, 5]
+    - [3, 4, 4, 5, 5]
+  ros_matrix:
+    - [1, 1, 4, 7]
+    - [1, 4, 4, 7]
+    - [2, 2, 8, 8]
+    - [3, 5, 5, 9]
+    - [3, 6, 6, 9]
+
+
+# NODATA value for outputs
+nodata: -1
