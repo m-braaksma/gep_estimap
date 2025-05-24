@@ -1,2 +1,2 @@
-setup_credentials.txt
 setup/*
+.snakemake/*
