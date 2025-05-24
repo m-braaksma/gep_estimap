@@ -1,48 +1,20 @@
-from pathlib import Path
-from snakemake.remote.S3 import RemoteProvider as S3RemoteProvider
-
 # Load config
 configfile: "config.yaml"
 
-
-S3 = S3RemoteProvider(
-    access_key_id="8CBN25LZUNYWLJZPQSXQ",
-    secret_access_key="cbU7On5L3peM5AiPF7Oa7G55aW6FDIIY5Uh0ynyk",
+# Define tier 2 storage settings
+# note: requires snakemake-storage-plugin-s3
+storage:
+    provider="s3",
     endpoint_url="https://s3.msi.umn.edu",
-    # region="us-east-1",  # or whatever MSI pretends to use
-    # config={"signature_version": "s3v4"}
-)
 
-# Get data_dir from config
+# Define flexible paths depending on data dir
 data_dir = config["data_dir"]
-USE_S3 = str(data_dir).startswith("s3://") or str(data_dir).startswith("s3:")
-# if USE_S3:
-#     S3 = S3RemoteProvider()
-#     def D(path_str):
-#         return S3[f"{data_dir.rstrip('/')}/{path_str}"]
-# else:
-#     DATA_DIR = Path(data_dir).expanduser()
-#     def D(path_str):
-#         return str(DATA_DIR / path_str)
-if USE_S3:
-    S3 = S3RemoteProvider()
-    def D(path_str):
-        # Remove s3:// prefix if present for remote()
-        s3_path = data_dir
-        if s3_path.startswith("s3://"):
-            s3_path = s3_path[len("s3://"):]
-        elif s3_path.startswith("s3:"):
-            s3_path = s3_path[len("s3:"):]
+def D(path_str):
+    if str(config["data_dir"]).startswith("s3://"):
+        return storage.s3(os.path.join(data_dir, path_str))
+    else:
+        return str(data_dir.joinpath(path_str))
 
-        # Join base s3 path and relative path with slash
-        full_path = f"{s3_path.rstrip('/')}/{path_str.lstrip('/')}"
-        # Return remote path object
-        return S3.remote(full_path)
-        print(full_path)
-else:
-    DATA_DIR = Path(data_dir).expanduser()
-    def D(path_str):
-        return str(DATA_DIR / path_str)
 
 rule all:
     input:
