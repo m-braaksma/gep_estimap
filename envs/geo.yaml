@@ -8,3 +8,9 @@ dependencies:
   - gdal
   - pygeoprocessing
   - scipy
+  - pandas
+  - geopandas
+  - openpyxl
+
+# To reset the environment, run: 
+# snakemake --use-conda --conda-cleanup-envs

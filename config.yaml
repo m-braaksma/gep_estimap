@@ -1,31 +1,43 @@
 # Base data directory (shared drive)
-# data_dir: '/Users/mbraaksma/Library/CloudStorage/GoogleDrive-braak014@umn.edu/Shared drives/NatCapTEEMs/Projects/Global GEP/Ecosystem Services SubFolders/Recreation/data/processed'
-data_dir: 's3://jajohns-tier2/Files/base_data/gep_recreation/'
+data_dir: '/Users/mbraaksma/Library/CloudStorage/GoogleDrive-braak014@umn.edu/Shared drives/NatCapTEEMs/Projects/Global GEP/Ecosystem Services SubFolders/Recreation/data/gep_recreation'
+# data_dir: 's3://Files/base_data/gep_recreation'
 
 # Input raster relative paths under data_dir
 inputs:
   lulc:
-    cropland: 'lulc/lulc_esa_seals7_2010_1km_cropland_share.tif'
-    forest: 'lulc/lulc_esa_seals7_2010_1km_forest_share.tif'
-    grassland: 'lulc/lulc_esa_seals7_2010_1km_grassland_share.tif'
-    othernat: 'lulc/lulc_esa_seals7_2010_1km_othernat_share.tif'
-    urban: 'lulc/lulc_esa_seals7_2010_1km_urban_share.tif'
-    water: 'lulc/lulc_esa_seals7_2010_1km_water_share.tif'
+    cropland: '0_processed_raster_inputs/lulc/lulc_esa_seals7_2010_1km_cropland_share.tif'
+    forest: '0_processed_raster_inputs/lulc/lulc_esa_seals7_2010_1km_forest_share.tif'
+    grassland: '0_processed_raster_inputs/lulc/lulc_esa_seals7_2010_1km_grassland_share.tif'
+    othernat: '0_processed_raster_inputs/lulc/lulc_esa_seals7_2010_1km_othernat_share.tif'
+    urban: '0_processed_raster_inputs/lulc/lulc_esa_seals7_2010_1km_urban_share.tif'
+    water: '0_processed_raster_inputs/lulc/lulc_esa_seals7_2010_1km_water_share.tif'
   pa:
-    wdpa: 'pa/wdpa_share_1km.tif'
-    kba: 'pa/kba_share_1km.tif'
-  road: 'grip4_road_length/grip4_road_length_1km.tif'
-  pop: 'worldpop/ppp_2010_1km_aligned.tif'
+    wdpa: '0_processed_raster_inputs/pa/wdpa_share_1km.tif'
+    kba: '0_processed_raster_inputs/pa/kba_share_1km.tif'
+  road: '0_processed_raster_inputs/grip4_road_length/grip4_road_length_1km.tif'
+  pop: '0_processed_raster_inputs/worldpop/ppp_2010_1km_aligned.tif'
+  admin_borders: '0_inputs/gadm_410-levels.gpkg'
+  tourism: 
+    overnight_stays: '0_inputs/unwto-all-data-download_2022.xlsx'
+    accommodation_locations: '0_inputs/Export_GEO-data_4-University-of-Minnesota.xlsx'
+
 
 # Output raster relative paths under data_dir
 estimap:
-  ebp: 'estimap_dir/eb-p_1km.tif'
-  human_inputs: 'estimap_dir/human_inputs_1km.tif'
-  ros: 'estimap_dir/ros_1km.tif'
-  high_quality: 'estimap_dir/high_quality_1km.tif'
-  distance_to_hq: 'estimap_dir/distance_to_hq_1km.tif'
-  visits: 'estimap_dir/visits_1km.tif'
-  value: 'estimap_dir/value_1km.tif'
+  ebp: '1_estimap/eb-p_1km.tif'
+  human_inputs: '1_estimap/human_inputs_1km.tif'
+  ros: '1_estimap/ros_1km.tif'
+  high_quality: '1_estimap/high_quality_1km.tif'
+  distance_to_hq: '1_estimap/distance_to_hq_1km.tif'
+daily_rec:
+  visits: '2_daily_rec/daily_rec_visits_1km.tif'
+  value: '2_daily_rec/daily_rec_value_1km.tif'
+  value_per_capita: '2_daily_rec/daily_rec_value_per_capita_1km.tif'
+nbt:
+  nights: '2_nbt/nbt_nights.gpkg'
+  value: '2_nbt/nbt_value.gpkg'
+  nights_per_capita: '2_nbt/nbt_value_per_capita.gpkg'
+  accommodation_zones: '2_nbt/nbt_accommodation_zones.gpkg'  # Diagnostic output
 
 # Conda (mamba) env
 conda: 'envs/geo.yaml'

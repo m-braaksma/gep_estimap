@@ -1,2 +1,3 @@
 setup/*
 .snakemake/*
+.DS_Store
